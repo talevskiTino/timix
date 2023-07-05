@@ -61,11 +61,11 @@ const Product = ({
         addItemToWishlistCache(client.cache, productData, userId);
       }
     } else {
-      console.log(123);
       let tempWishlist = getTempWishlistFromBrowser();
-      if (tempWishlist) {
-        tempWishlist.products.push(productId);
+      if (!tempWishlist) {
+        tempWishlist = { products: [] };
       }
+      tempWishlist.products.push(productId);
       saveTempWishlistToBrowser(tempWishlist);
       updateAnonymousUserProductsCache(client.cache, productId, true);
       anonymousUserWishlistCache(client.cache, product, true);
